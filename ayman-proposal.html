@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>عرض تطوير · مكتبة أيمن · شركة أساس</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --p:    #8B5CF6;
+  --p-l:  #D1BEFB;
+  --p-xl: #E8DEFD;
+  --s:    #EC4899;
+  --s-l:  #F7B6D6;
+  --s-xl: #FBDAEB;
+  --o:    #F97316;
+  --o-l:  #FDC09A;
+  --o-xl: #FEE8D8;
+  --g:    #10B981;
+  --g-l:  #6EE7C4;
+  --g-xl: #D1F5EB;
+  --c:    #06B6D4;
+  --c-xl: #CFFAFE;
+  --y:    #FCD34D;
+  --y-xl: #FEF9C3;
+  --r:    #EF4444;
+  --r-xl: #FEE2E2;
+
+  --ink:   #0F0A1A;
+  --ink2:  #3B3058;
+  --ink3:  #7C6FA0;
+  --ink4:  #BDB5D0;
+  --bg:    #FAF9FD;
+  --white: #FFFFFF;
+  --line:  #EBE6F5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+/* ── PROGRESS ── */
+#bar { position:fixed; top:0; right:0; height:3px; width:0%; background:linear-gradient(90deg,var(--p),var(--s)); z-index:999; transition:width 0.1s; border-radius:0 0 0 3px; }
+
+/* ── PAGE ── */
+.page { max-width:430px; margin:0 auto; padding:0 20px 72px; }
+
+/* ── NAV ── */
+.nav {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 0 0; margin-bottom:36px;
+}
+.nav-brand {
+  display:flex; align-items:center; gap:8px;
+}
+.nav-logo {
+  width:34px; height:34px; border-radius:10px;
+  background:linear-gradient(135deg,var(--p),var(--s));
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:900; color:white;
+  box-shadow:0 4px 12px rgba(139,92,246,0.35);
+}
+.nav-name { font-size:14px; font-weight:800; color:var(--ink); }
+.nav-name span { color:var(--p); }
+.nav-pill {
+  font-size:10px; font-weight:700; color:var(--p);
+  background:var(--p-xl); border:1px solid var(--p-l);
+  padding:4px 12px; border-radius:30px;
+}
+
+/* ── HERO ── */
+.hero { margin-bottom:32px; }
+
+.hero-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:linear-gradient(90deg,var(--p-xl),var(--s-xl));
+  border:1px solid var(--p-l);
+  border-radius:30px; padding:5px 14px;
+  font-size:11px; font-weight:700; color:var(--p);
+  margin-bottom:16px;
+}
+.hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--p); }
+
+.hero h1 {
+  font-size:34px; font-weight:900; line-height:1.18;
+  color:var(--ink); margin-bottom:14px; letter-spacing:-0.6px;
+}
+.hero h1 .grad {
+  background:linear-gradient(90deg,var(--p),var(--s));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.hero-body { font-size:13px; font-weight:400; color:var(--ink2); line-height:1.9; margin-bottom:22px; }
+
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.stat-card {
+  border-radius:14px; padding:14px 10px; text-align:center;
+  border:1px solid; position:relative; overflow:hidden;
+}
+.stat-card::after {
+  content:''; position:absolute;
+  top:-20px; left:50%; transform:translateX(-50%);
+  width:60px; height:60px; border-radius:50%;
+  background:inherit; opacity:0.15; filter:blur(20px);
+}
+.sc1 { background:var(--p-xl); border-color:var(--p-l); }
+.sc2 { background:var(--s-xl); border-color:var(--s-l); }
+.sc3 { background:var(--g-xl); border-color:var(--g-l); }
+.stat-n { font-size:20px; font-weight:900; line-height:1; margin-bottom:4px; }
+.sc1 .stat-n { color:var(--p); }
+.sc2 .stat-n { color:var(--s); }
+.sc3 .stat-n { color:var(--g); }
+.stat-l { font-size:10px; font-weight:600; color:var(--ink3); line-height:1.4; }
+
+/* ── SECTION ── */
+.section { margin-bottom:36px; }
+.sec-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.sec-badge {
+  font-size:10px; font-weight:800; padding:3px 10px;
+  border-radius:20px; white-space:nowrap;
+}
+.sb-purple { background:var(--p-xl); color:var(--p); border:1px solid var(--p-l); }
+.sb-pink   { background:var(--s-xl); color:var(--s); border:1px solid var(--s-l); }
+.sb-orange { background:var(--o-xl); color:var(--o); border:1px solid var(--o-l); }
+.sb-green  { background:var(--g-xl); color:var(--g); border:1px solid var(--g-l); }
+.sec-line  { flex:1; height:1px; background:var(--line); }
+.sec-title { font-size:22px; font-weight:900; color:var(--ink); margin-bottom:8px; letter-spacing:-0.3px; line-height:1.25; }
+.sec-body  { font-size:13px; font-weight:400; color:var(--ink2); line-height:1.85; margin-bottom:18px; }
+
+/* ── DIV ── */
+.div { height:1px; background:var(--line); margin:0 0 32px; }
+
+/* ── PROBLEMS ── */
+.problems { display:flex; flex-direction:column; gap:8px; }
+.prob {
+  background:var(--white); border:1px solid var(--line);
+  border-radius:14px; padding:14px 16px;
+  display:flex; gap:12px; align-items:flex-start;
+  transition: box-shadow 0.2s;
+}
+.prob:hover { box-shadow:0 4px 18px rgba(139,92,246,0.08); }
+.prob-icon {
+  width:36px; height:36px; border-radius:11px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; flex-shrink:0;
+}
+.pi1 { background:var(--r-xl); }
+.pi2 { background:var(--s-xl); }
+.pi3 { background:var(--o-xl); }
+.prob-title { font-size:13px; font-weight:800; color:var(--ink); margin-bottom:4px; }
+.prob-desc  { font-size:12px; font-weight:400; color:var(--ink2); line-height:1.7; }
+
+/* ── SERVICES ── */
+.services { display:flex; flex-direction:column; gap:8px; }
+.svc {
+  background:var(--white); border:1.5px solid var(--line);
+  border-radius:16px; padding:18px;
+  transition: all 0.2s ease; position:relative; overflow:hidden;
+}
+.svc-strip {
+  position:absolute; top:0; right:0;
+  width:100%; height:3px;
+  border-radius:16px 16px 0 0;
+}
+.ss-p { background:linear-gradient(90deg,var(--p),var(--p-l)); }
+.ss-s { background:linear-gradient(90deg,var(--s),var(--s-l)); }
+.ss-c { background:linear-gradient(90deg,var(--c),#67E8F9); }
+.ss-o { background:linear-gradient(90deg,var(--o),var(--o-l)); }
+.svc:hover { box-shadow:0 6px 24px rgba(139,92,246,0.1); transform:translateY(-1px); }
+.svc-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
+.svc-name { font-size:14px; font-weight:800; color:var(--ink); }
+.svc-badge { font-size:10px; font-weight:700; padding:2px 9px; border-radius:20px; border:1px solid; flex-shrink:0; margin-top:1px; }
+.bv-core { color:var(--p); border-color:var(--p-l); background:var(--p-xl); }
+.bv-plus { color:var(--g); border-color:var(--g-l); background:var(--g-xl); }
+.svc-desc { font-size:12px; font-weight:400; color:var(--ink2); line-height:1.75; margin-bottom:12px; }
+.chips { display:flex; flex-wrap:wrap; gap:5px; }
+.chip { font-size:10px; font-weight:700; color:var(--ink3); background:var(--bg); border:1px solid var(--line); padding:3px 9px; border-radius:20px; }
+
+/* ── TIMELINE ── */
+.tl { display:flex; flex-direction:column; }
+.tl-item { display:grid; grid-template-columns:44px 1fr; }
+.tl-l { display:flex; flex-direction:column; align-items:center; padding-top:3px; }
+.tl-dot {
+  width:12px; height:12px; border-radius:50%;
+  background:var(--white); border:2.5px solid var(--p);
+  flex-shrink:0; z-index:1;
+  transition:background 0.2s, transform 0.2s;
+}
+.tl-item:hover .tl-dot { background:var(--p); transform:scale(1.2); }
+.tl-stem { flex:1; width:1.5px; background:linear-gradient(to bottom,var(--p-l),var(--line)); margin:4px 0; }
+.tl-item:last-child .tl-stem { display:none; }
+.tl-r { padding:0 0 28px; }
+.tl-num { font-size:10px; font-weight:800; color:var(--p); letter-spacing:0.5px; margin-bottom:4px; }
+.tl-title { font-size:14px; font-weight:800; color:var(--ink); margin-bottom:5px; }
+.tl-desc { font-size:12px; font-weight:400; color:var(--ink2); line-height:1.7; margin-bottom:8px; }
+.tl-tags { display:flex; flex-wrap:wrap; gap:4px; }
+.tl-tag { font-size:10px; font-weight:600; color:var(--ink3); background:var(--white); border:1px solid var(--line); padding:2px 8px; border-radius:20px; }
+
+/* ── PAYMENT ── */
+.payment-card {
+  border-radius:18px; overflow:hidden;
+  border:1.5px solid var(--p-l);
+  box-shadow:0 6px 28px rgba(139,92,246,0.1);
+  margin-bottom:12px;
+}
+.pay-head {
+  background:linear-gradient(135deg,var(--p),#7C3AED);
+  padding:20px 20px 18px;
+}
+.ph-title { font-size:18px; font-weight:900; color:white; margin-bottom:5px; }
+.ph-sub { font-size:12px; color:rgba(255,255,255,0.7); font-weight:500; line-height:1.7; }
+.ph-chips { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
+.ph-chip {
+  font-size:10px; font-weight:700; color:white;
+  background:rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:3px 10px; border-radius:20px;
+}
+
+.pay-steps { background:var(--white); }
+.pay-row {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 18px; border-bottom:1px solid var(--line);
+  transition:background 0.15s;
+}
+.pay-row:last-child { border-bottom:none; }
+.pay-row:hover { background:var(--p-xl); }
+.pay-n {
+  width:28px; height:28px; border-radius:9px;
+  background:var(--p-xl); border:1px solid var(--p-l);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:800; color:var(--p); flex-shrink:0;
+}
+.pay-info { flex:1; }
+.pay-when { font-size:10px; font-weight:600; color:var(--ink3); margin-bottom:1px; }
+.pay-what { font-size:13px; font-weight:700; color:var(--ink); }
+.pay-check { width:18px; height:18px; border-radius:50%; background:var(--g-xl); border:1.5px solid var(--g-l); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--g); flex-shrink:0; }
+
+/* ── GUARANTEE ── */
+.guarantee {
+  border:1.5px solid var(--g-l); background:var(--g-xl);
+  border-radius:14px; padding:16px;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.gu-icon { width:36px; height:36px; background:white; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; border:1px solid var(--g-l); }
+.gu-title { font-size:13px; font-weight:800; color:var(--g); margin-bottom:4px; }
+.gu-body { font-size:12px; font-weight:400; color:var(--ink2); line-height:1.7; }
+
+/* ── TEAM ── */
+.team { display:flex; flex-direction:column; gap:8px; }
+.member {
+  background:var(--white); border:1.5px solid var(--line);
+  border-radius:14px; padding:14px 16px;
+  display:flex; align-items:center; gap:14px;
+  transition: box-shadow 0.2s;
+}
+.member:hover { box-shadow:0 4px 16px rgba(139,92,246,0.08); }
+.mem-av {
+  width:46px; height:46px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; font-size:20px;
+  flex-shrink:0; border:1px solid var(--line);
+}
+.av1 { background:var(--p-xl); }
+.av2 { background:var(--s-xl); }
+.av3 { background:var(--o-xl); }
+.mem-name { font-size:14px; font-weight:800; color:var(--ink); margin-bottom:2px; }
+.mem-role { font-size:11px; font-weight:700; margin-bottom:6px; }
+.r1 { color:var(--p); }
+.r2 { color:var(--s); }
+.r3 { color:var(--o); }
+.mchips { display:flex; flex-wrap:wrap; gap:4px; }
+.mc { font-size:10px; font-weight:600; color:var(--ink3); background:var(--bg); border:1px solid var(--line); padding:2px 8px; border-radius:20px; }
+
+/* ── CTA ── */
+.cta-card {
+  background:linear-gradient(135deg,var(--p),var(--s));
+  border-radius:20px; padding:28px 22px;
+  text-align:center; position:relative; overflow:hidden;
+  box-shadow:0 10px 40px rgba(139,92,246,0.3);
+  margin-bottom:32px;
+}
+.cta-card::before {
+  content:''; position:absolute;
+  top:-40px; left:50%; transform:translateX(-50%);
+  width:200px; height:200px; border-radius:50%;
+  background:rgba(255,255,255,0.08); pointer-events:none;
+}
+.cta-card::after {
+  content:''; position:absolute;
+  bottom:-40px; right:-20px;
+  width:150px; height:150px; border-radius:50%;
+  background:rgba(255,255,255,0.06); pointer-events:none;
+}
+.cta-eyebrow { font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:1.5px; margin-bottom:10px; position:relative; z-index:1; }
+.cta-title { font-size:26px; font-weight:900; color:white; line-height:1.2; margin-bottom:10px; letter-spacing:-0.3px; position:relative; z-index:1; }
+.cta-sub { font-size:13px; font-weight:400; color:rgba(255,255,255,0.8); line-height:1.8; margin-bottom:22px; position:relative; z-index:1; }
+.cta-btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; background:white; color:var(--p);
+  font-family:'Cairo',sans-serif; font-size:15px; font-weight:800;
+  padding:15px 24px; border-radius:12px;
+  text-decoration:none; border:none; cursor:pointer;
+  transition:transform 0.2s, box-shadow 0.2s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
+  position:relative; z-index:1;
+}
+.cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,0.2); }
+.cta-btn svg { width:18px; height:18px; }
+.cta-note { font-size:11px; color:rgba(255,255,255,0.6); margin-top:12px; position:relative; z-index:1; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top:1px solid var(--line); padding-top:18px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-brand { display:flex; align-items:center; gap:7px; }
+.footer-dot { width:6px; height:6px; border-radius:50%; background:var(--p); }
+.footer-n { font-size:12px; font-weight:700; color:var(--ink3); }
+.footer-n em { font-style:normal; color:var(--p); }
+.footer-loc { font-size:10px; font-weight:500; color:var(--ink4); }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(16px); transition:opacity 0.55s ease,transform 0.55s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<div class="page">
+
+  <!-- NAV -->
+  <div class="nav reveal">
+    <div class="nav-brand">
+      <div class="nav-logo">أ</div>
+      <div class="nav-name">شركة <span>أساس</span></div>
+    </div>
+    <div class="nav-pill">عرض تجاري · ٢٠٢٦</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero reveal">
+    <div class="hero-tag">مُقدَّم إلى مكتبة أيمن</div>
+    <h1>تطبيقكم يستحق<br>ما هو <span class="grad">أفضل.</span></h1>
+    <p class="hero-body">رصدنا التطبيق الحالي وقرأنا تعليقات زبائنكم على منصة إنستغرام. المشكلة واضحة، والحل بات جاهزاً — منظومة رقمية متكاملة تليق بأكبر مكتبة في العراق.</p>
+    <div class="stats-row">
+      <div class="stat-card sc1">
+        <div class="stat-n">٨٠٠ك</div>
+        <div class="stat-l">متابع على إنستغرام</div>
+      </div>
+      <div class="stat-card sc2">
+        <div class="stat-n">٣</div>
+        <div class="stat-l">فروع في البصرة</div>
+      </div>
+      <div class="stat-card sc3">
+        <div class="stat-n">#١</div>
+        <div class="stat-l">أكبر مكتبة في العراق</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div reveal"></div>
+
+  <!-- PROBLEMS -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <span class="sec-badge sb-pink">المشكلة</span>
+      <div class="sec-line"></div>
+    </div>
+    <h2 class="sec-title">ما الذي لاحظناه؟</h2>
+    <p class="sec-body">قرأنا التعليقات على إنستغرام قبل كتابة هذا العرض. هذا ما يقوله زبائنكم فعلاً:</p>
+    <div class="problems">
+      <div class="prob">
+        <div class="prob-icon pi1">⚡</div>
+        <div>
+          <div class="prob-title">التطبيق لا يعمل بشكل موثوق</div>
+          <div class="prob-desc">تعليقات متعددة تشير إلى أعطال متكررة وأداء بطيء — زبائن يُغلقون التطبيق قبل إتمام أي عملية شراء.</div>
+        </div>
+      </div>
+      <div class="prob">
+        <div class="prob-icon pi2">🎯</div>
+        <div>
+          <div class="prob-title">التصميم لا يعكس حجم العلامة التجارية</div>
+          <div class="prob-desc">أكبر مكتبة في العراق تستحق تجربة مستخدم استثنائية — لا تطبيقاً يجعل الزبون يشكّك في موثوقية المتجر.</div>
+        </div>
+      </div>
+      <div class="prob">
+        <div class="prob-icon pi3">📦</div>
+        <div>
+          <div class="prob-title">غياب منظومة إدارة رقمية موحدة</div>
+          <div class="prob-desc">ثلاثة فروع بلا لوحة تحكم مركزية تعني ضغطاً يومياً على الفريق وأخطاءً محتملة في المخزون والطلبات.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div reveal"></div>
+
+  <!-- SERVICES -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <span class="sec-badge sb-purple">الحل</span>
+      <div class="sec-line"></div>
+    </div>
+    <h2 class="sec-title">ما الذي نقدمه؟</h2>
+    <p class="sec-body">حزمة متكاملة من أربعة محاور — منظومة رقمية شاملة تُدار من مكان واحد.</p>
+    <div class="services">
+
+      <div class="svc">
+        <div class="svc-strip ss-p"></div>
+        <div class="svc-top">
+          <div class="svc-name">إعادة تصميم التطبيق</div>
+          <span class="svc-badge bv-core">محور أساسي</span>
+        </div>
+        <p class="svc-desc">تصميم كامل من الصفر لتجربة المستخدم — شاشات سلسة وهوية بصرية تليق بمكانة مكتبة أيمن.</p>
+        <div class="chips">
+          <span class="chip">UI / UX</span><span class="chip">iOS و Android</span><span class="chip">نظام تصميم موحد</span><span class="chip">نموذج أولي تفاعلي</span>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-strip ss-s"></div>
+        <div class="svc-top">
+          <div class="svc-name">بناء التطبيق</div>
+          <span class="svc-badge bv-core">محور أساسي</span>
+        </div>
+        <p class="svc-desc">تطبيق مستقر وسريع يعمل على آيفون وأندرويد، جاهز للنشر على متجر Apple ومتجر Google Play.</p>
+        <div class="chips">
+          <span class="chip">iOS + Android</span><span class="chip">نقاط المكافآت</span><span class="chip">دفع إلكتروني</span><span class="chip">تتبع الطلبات</span><span class="chip">إشعارات فورية</span>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-strip ss-c"></div>
+        <div class="svc-top">
+          <div class="svc-name">الصفحة الترويجية</div>
+          <span class="svc-badge bv-plus">محور مكمّل</span>
+        </div>
+        <p class="svc-desc">صفحة ويب احترافية تمثّل مكتبة أيمن على شبكة الإنترنت، محسّنة لمحركات البحث.</p>
+        <div class="chips">
+          <span class="chip">محسّنة للبحث</span><span class="chip">متجاوبة مع الجوال</span><span class="chip">عروض وأخبار</span>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-strip ss-o"></div>
+        <div class="svc-top">
+          <div class="svc-name">لوحة إدارة المخزن</div>
+          <span class="svc-badge bv-plus">محور مكمّل</span>
+        </div>
+        <p class="svc-desc">لوحة تحكم مركزية لمتابعة المخزون والطلبات لثلاثة فروع من واجهة واحدة.</p>
+        <div class="chips">
+          <span class="chip">إدارة ٣ فروع</span><span class="chip">تتبع الطلبات</span><span class="chip">تقارير المبيعات</span><span class="chip">إدارة المنتجات</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="div reveal"></div>
+
+  <!-- TIMELINE -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <span class="sec-badge sb-orange">الجدول الزمني</span>
+      <div class="sec-line"></div>
+    </div>
+    <h2 class="sec-title">٤ إلى ٦ أسابيع</h2>
+    <p class="sec-body">مراحل واضحة ومحددة — ستعرفون في كل مرحلة بالضبط ما يجري.</p>
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-l"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+        <div class="tl-r">
+          <div class="tl-num">الأسبوع الأول</div>
+          <div class="tl-title">التحليل والاستكشاف</div>
+          <div class="tl-desc">نجلس معكم لفهم الاحتياجات، ندرس المنافسين، ونضع خريطة المشروع.</div>
+          <div class="tl-tags"><span class="tl-tag">اجتماع تأسيسي</span><span class="tl-tag">تحليل المنافسين</span><span class="tl-tag">خريطة المشروع</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-l"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+        <div class="tl-r">
+          <div class="tl-num">الأسبوع الثاني والثالث</div>
+          <div class="tl-title">التصميم والنموذج الأولي</div>
+          <div class="tl-desc">تصميم شامل لجميع الشاشات مع نموذج تفاعلي قابل للتجربة قبل التطوير.</div>
+          <div class="tl-tags"><span class="tl-tag">الهياكل الأولية</span><span class="tl-tag">تصميم الواجهات</span><span class="tl-tag">مراجعتكم وموافقتكم</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-l"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+        <div class="tl-r">
+          <div class="tl-num">الأسبوع الرابع والخامس</div>
+          <div class="tl-title">التطوير والبناء</div>
+          <div class="tl-desc">بناء التطبيق ولوحة التحكم والصفحة الترويجية مع تحديثات أسبوعية.</div>
+          <div class="tl-tags"><span class="tl-tag">تطوير التطبيق</span><span class="tl-tag">لوحة الإدارة</span><span class="tl-tag">الصفحة الترويجية</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-l"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+        <div class="tl-r">
+          <div class="tl-num">الأسبوع السادس</div>
+          <div class="tl-title">الاختبار والإطلاق</div>
+          <div class="tl-desc">اختبار دقيق على أجهزة حقيقية ثم نشر التطبيق على المتجرين وإطلاق الموقع رسمياً.</div>
+          <div class="tl-tags"><span class="tl-tag">اختبار الجودة</span><span class="tl-tag">App Store</span><span class="tl-tag">Play Store</span><span class="tl-tag">الإطلاق الرسمي</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="div reveal"></div>
+
+  <!-- PAYMENT -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <span class="sec-badge sb-green">آلية الدفع</span>
+      <div class="sec-line"></div>
+    </div>
+    <h2 class="sec-title">على دفعات مرنة.</h2>
+    <p class="sec-body">كل دفعة مرتبطة بمرحلة مكتملة وموافقتكم عليها — لا دفعة كاملة مسبقاً قبل أن تروا شيئاً.</p>
+
+    <div class="payment-card">
+      <div class="pay-head">
+        <div class="ph-title">نظام الدفع المرحلي</div>
+        <div class="ph-sub">تدفعون فقط عند رؤية نتيجة حقيقية — حمايةً لكم في كل خطوة.</div>
+        <div class="ph-chips">
+          <span class="ph-chip">٤ دفعات</span>
+          <span class="ph-chip">٤-٦ أسابيع</span>
+          <span class="ph-chip">موافقة قبل كل دفعة</span>
+        </div>
+      </div>
+      <div class="pay-steps">
+        <div class="pay-row">
+          <div class="pay-n">١</div>
+          <div class="pay-info">
+            <div class="pay-when">عند التوقيع على العقد</div>
+            <div class="pay-what">دفعة الانطلاق</div>
+          </div>
+          <div class="pay-check">✓</div>
+        </div>
+        <div class="pay-row">
+          <div class="pay-n">٢</div>
+          <div class="pay-info">
+            <div class="pay-when">بعد تسليم التصميم وموافقتكم</div>
+            <div class="pay-what">دفعة التصميم</div>
+          </div>
+          <div class="pay-check">✓</div>
+        </div>
+        <div class="pay-row">
+          <div class="pay-n">٣</div>
+          <div class="pay-info">
+            <div class="pay-when">بعد تسليم التطبيق للاختبار</div>
+            <div class="pay-what">دفعة التطوير</div>
+          </div>
+          <div class="pay-check">✓</div>
+        </div>
+        <div class="pay-row">
+          <div class="pay-n">٤</div>
+          <div class="pay-info">
+            <div class="pay-when">بعد الإطلاق الرسمي</div>
+            <div class="pay-what">الدفعة الختامية</div>
+          </div>
+          <div class="pay-check">✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="gu-icon">🛡</div>
+      <div>
+        <div class="gu-title">ضمان استرداد كامل</div>
+        <div class="gu-body">إذا لم يُعجبكم التصميم في المرحلة الأولى، نوقف المشروع فوراً ونُعيد إليكم الدفعة الأولى بالكامل.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div reveal"></div>
+
+  <!-- TEAM -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <span class="sec-badge sb-purple">الفريق</span>
+      <div class="sec-line"></div>
+    </div>
+    <h2 class="sec-title">من نحن؟</h2>
+    <p class="sec-body">فريق شركة أساس — ثلاثة متخصصين يعملون كمنظومة متكاملة.</p>
+    <div class="team">
+      <div class="member">
+        <div class="mem-av av1">🎨</div>
+        <div>
+          <div class="mem-name">مصمم المنتج</div>
+          <div class="mem-role r1">Product Designer</div>
+          <div class="mchips"><span class="mc">UI / UX</span><span class="mc">Figma</span><span class="mc">تجربة المستخدم</span></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="mem-av av2">💻</div>
+        <div>
+          <div class="mem-name">مطوّر التطبيق</div>
+          <div class="mem-role r2">App Developer</div>
+          <div class="mchips"><span class="mc">Flutter</span><span class="mc">iOS & Android</span><span class="mc">Backend</span></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="mem-av av3">📢</div>
+        <div>
+          <div class="mem-name">مدير العلاقات والتسويق</div>
+          <div class="mem-role r3">PR Manager</div>
+          <div class="mchips"><span class="mc">إدارة الإطلاق</span><span class="mc">التسويق الرقمي</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- FOOTER -->
+  <div class="footer reveal">
+    <div class="footer-brand">
+      <div class="footer-dot"></div>
+      <div class="footer-n">شركة <em>أساس</em></div>
+    </div>
+    <div class="footer-loc">بغداد · العراق · ٢٠٢٦</div>
+  </div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('bar').style.width = pct + '%';
+});
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
